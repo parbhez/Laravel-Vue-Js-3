@@ -18,7 +18,8 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Post</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link {{ (request()->is('/post')) ? 'active' : '' }}" href="{{ route('post') }}">Manage Posta</a></li>
+                    <li><a class="nav-link {{ (request()->is('/post')) ? 'active' : '' }}" href="{{ route('post') }}">Manage Post</a></li>
+                    <li><a class="nav-link {{ (request()->is('/category')) ? 'active' : '' }}" href="{{ url('category') }}">Manage Category</a></li>
                 </ul>
             </li>
 

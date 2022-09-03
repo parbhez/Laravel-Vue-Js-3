@@ -5,15 +5,20 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Laravel Vue 3</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Extra CSS Files -->
+    @stack('style')
+
     <!-- General CSS Files -->
     <link rel="stylesheet" href="{{ url('assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ url('assets/modules/fontawesome/css/all.min.css') }}">
 
     <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{url('assets/modules/summernote/summernote-bs4.css')}}">
-    <link rel="stylesheet" href="{{url('assets/modules/jquery-selectric/selectric.css')}}">
-    <link rel="stylesheet" href="{{url('assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{ url('assets/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/modules/jquery-selectric/selectric.css') }}">
+    <link rel="stylesheet" href="{{ url('assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
@@ -50,6 +55,8 @@
         </div>
     </div>
 
+    <!-- Extra JS Scripts -->
+    @stack('script')
     <!-- General JS Scripts -->
     <script src="{{ url('assets/modules/jquery.min.js') }}"></script>
     <script src="{{ url('assets/modules/popper.js') }}"></script>
@@ -69,7 +76,7 @@
     <!-- Page Specific JS File -->
     <script src="{{ url('assets/js/page/components-table.js') }}"></script>
     <script src="{{ url('assets/js/page/features-post-create.js') }}"></script>
-    <script src="{{url('assets/js/page/features-posts.js')}}"></script>
+    <script src="{{ url('assets/js/page/features-posts.js') }}"></script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script> --}}
 
     <!-- Template JS File -->

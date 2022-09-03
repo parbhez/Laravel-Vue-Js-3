@@ -57,3 +57,7 @@
         </section>
     </div>
 @endsection
+
+@push('script')
+@vite('resources/js/post.js')
+@endpush

@@ -8,20 +8,19 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function index()
+    public function post()
     {
         $posts = Post::limit(10)->get();
 
        return view('post',compact('posts'));
 
-
     }
 
 
-    public function get_post()
+    public function category()
     {
-        $data = Post::get();
-        return response()->json(['message'=>'Data found','code' => 200]);
+        return view('category');
+
     }
 
 

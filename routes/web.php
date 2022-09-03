@@ -18,6 +18,6 @@ use App\Http\Controllers\PostController;
 
 Route::get('/',[HomeController::class,'index']);
 
-Route::get('/post',[PostController::class,'index'])->name('post');
+Route::get('/post',[PostController::class,'post'])->name('post');
 
-Route::get('/get_post',[PostController::class,'get_post'])->name('get_post');
+Route::get('/category',[PostController::class,'category'])->name('category');
