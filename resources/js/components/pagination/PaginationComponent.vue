@@ -1,111 +1,118 @@
 <template>
-	
-	<div class="float-right">
-            <nav v-if="pageData.last_page > 1">
-              <ul class="pagination">
-                <li :class="[ ((pageData.current_page == 1) ? 'page-item disabled' : '') ]">
-                  <!-- <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">&laquo;</span>
-                    <span class="sr-only">Previous</span>
-                  </a> -->
-					<a class="page-link" :href="'?page='+pageData.current_page" @click.prevent="pageClicked(pageData.current_page-1)" aria-label="Previous" v-if="pageData.current_page != 1">
-								<span aria-hidden="true">&laquo;</span>
-                    			<span class="sr-only">Previous</span>
-					</a>
-					<a v-else>
-						<span aria-hidden="true">&laquo;</span>
-                    	<span class="sr-only">Previous</span>
-					</a>
+    <div class="float-right">
+        <nav v-if="pageData.last_page > 1">
+            <ul class="pagination">
+                <li
+                    :class="[
+                        pageData.current_page == 1 ? 'page-item disabled' : '',
+                    ]"
+                >
+                    <a
+                        class="page-link"
+                        :href="'?page=' + pageData.current_page"
+                        @click.prevent="pageClicked(pageData.current_page - 1)"
+                        aria-label="Previous"
+                        v-if="pageData.current_page != 1"
+                    >
+                        <span aria-hidden="true">«</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a v-else>
+                        <span aria-hidden="true"> «</span>
+                        <span class="sr-only">Previous</span>
+                    </a>
                 </li>
 
-               
-				<li class="page-item" v-for="pageNo in range(paginateLoop, numberOfPage)" :key="pageNo">
-					<a :class="[ ((pageData.current_page == pageNo) ? 'page-link' : 'page-link') ]" :href="'?page='+pageNo" @click.prevent="pageClicked(pageNo)">{{ pageNo }}</a>
-				</li>
-
-
-               <!-- <li class="page-item">
-                  <a class="page-link" href="#">2</a>
+                <li
+                    :class="[
+                        pageData.current_page == pageNo
+                            ? 'page-item active'
+                            : 'page-item',
+                    ]"
+                    v-for="pageNo in range(paginateLoop, numberOfPage)"
+                    :key="pageNo"
+                >
+                    <a
+                        :class="[
+                            pageData.current_page == pageNo
+                                ? 'page-link'
+                                : 'page-link',
+                        ]"
+                        :href="'?page=' + pageNo"
+                        @click.prevent="pageClicked(pageNo)"
+                        >{{ pageNo }}</a
+                    >
                 </li>
 
-                <li class="page-item">
-                  <a class="page-link" href="#">3</a>
-                </li> -->
-
-				
-                <li class="page-item" :class="[ ((pageData.current_page == pageData.last_page) ? 'page-item disabled' : '') ]">
-					<a class="page-link" :href="'?page='+pageData.current_page" @click.prevent="pageClicked(pageData.current_page+1)" aria-label="Next" v-if="pageData.current_page != pageData.last_page">
-								<span aria-hidden="true">&laquo;</span>
-                    			<span class="sr-only">Next</span>
-					</a>
-					<a v-else>
-						<span aria-hidden="true">&laquo;</span>
-                    	<span class="sr-only">Next</span>
-					</a>
+                <li
+                    class="page-item"
+                    :class="[
+                        pageData.current_page == pageData.last_page
+                            ? 'page-item disabled'
+                            : '',
+                    ]"
+                >
+                    <a
+                        class="page-link"
+                        :href="'?page=' + pageData.current_page"
+                        @click.prevent="pageClicked(pageData.current_page + 1)"
+                        aria-label="Next"
+                        v-if="pageData.current_page != pageData.last_page"
+                    >
+                        <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    <a v-else>
+                        <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </li>
-
-              </ul>
-            </nav>
-          </div>
-
+            </ul>
+        </nav>
+    </div>
 </template>
 
 <script type="text/javascript">
+export default {
+    props: ["pageData"],
 
-	export default{
+    data() {
+        return {};
+    },
 
-		props : ['pageData'],
+    methods: {
+        range(start, count) {
+            return Array.apply(0, Array(count)).map(function (element, index) {
+                return index + start;
+            });
+        },
 
-		data(){
+        pageClicked(page) {
+            console.log(page);
+            this.$parent.pageClicked(page);
+        },
+    },
 
-			return {
-
-
-			}
-		},
-
-		methods : {
-       
-			range(start, count) {
-				return Array.apply(0, Array(count)).map(function(element, index) {
-					return index + start;
-				});
-			},
-
-			pageClicked(page){
-                
-				console.log(page);
-                this.$parent.pageClicked(page);
-
-			}
-		},
-
-			computed: {
-			paginateLoop() {
-				let pageData = this.pageData;
-				if (pageData.last_page > 11) {
-					if (pageData.last_page - 5 <= pageData.current_page) {
-						return pageData.last_page - 10;
-					}
-					if (pageData.current_page > 6) {
-						return pageData.current_page - 5;
-					}
-				}
-				return 1;
-			},
-			numberOfPage() {
-				if (this.pageData.last_page < 11) {
-					return this.pageData.last_page;
-				} else {
-					return 11;
-				}
-			}
-		}
-
-
-
-
-	}
-
-
+    computed: {
+        paginateLoop() {
+            let pageData = this.pageData;
+            if (pageData.last_page > 11) {
+                if (pageData.last_page - 5 <= pageData.current_page) {
+                    return pageData.last_page - 10;
+                }
+                if (pageData.current_page > 6) {
+                    return pageData.current_page - 5;
+                }
+            }
+            return 1;
+        },
+        numberOfPage() {
+            if (this.pageData.last_page < 11) {
+                return this.pageData.last_page;
+            } else {
+                return 11;
+            }
+        },
+    },
+};
 </script>

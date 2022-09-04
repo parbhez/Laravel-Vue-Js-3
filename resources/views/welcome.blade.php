@@ -23,6 +23,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ url('assets/css/components.css') }}">
+    <input type="hidden" id="base_url" value="{{ url('/') }}">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -40,9 +41,9 @@
 
 <body>
     <div id="app">
+
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
-
             @include('partials.nav')
             @include('partials.sidebar')
 
@@ -54,6 +55,11 @@
             @include('partials.footer')
         </div>
     </div>
+
+    <script>
+        var base_url = "{{ url('/') }}"+'/';
+        var lang = "{{ app()->getLocale() }}"
+    </script>
 
     <!-- Extra JS Scripts -->
     @stack('script')

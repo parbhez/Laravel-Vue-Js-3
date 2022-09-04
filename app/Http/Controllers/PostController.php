@@ -24,7 +24,7 @@ class PostController extends Controller
             $post->where('title', 'LIKE', '%' . $request->keyword . '%');
         }
 
-        $post = $post->paginate(10);
+        $post = $post->paginate(20);
 
         return response()->json($post);
 
