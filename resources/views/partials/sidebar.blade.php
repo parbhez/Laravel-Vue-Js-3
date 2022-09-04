@@ -8,18 +8,22 @@
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
-            <li class={{ (request()->is('/')) ? 'active' : '' }}>
-                <a class="nav-link dropdown" href="{{ url('/') }}"><i class="fas fa-fire"></i>
+            <li class="{{ Route::current()->getName() == 'dashboard' ? 'active' : '' }}">
+                <a class="nav-link dropdown" href="{{ route('dashboard') }}"><i class="fas fa-fire"></i>
                     <span>Dashboard</span></a>
             </li>
 
+
             <li class="menu-header">Menu</li>
-            <li class="dropdown">
+            <li class="dropdown {{ Route::current()->getName() == 'post' || Route::current()->getName() == 'category' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Post</span></a>
-                <ul class="dropdown-menu">
-                    <li><a class="nav-link {{ (request()->is('/post')) ? 'active' : '' }}" href="{{ route('post') }}">Manage Post</a></li>
-                    <li><a class="nav-link {{ (request()->is('/category')) ? 'active' : '' }}" href="{{ url('category') }}">Manage Category</a></li>
+                <ul class="dropdown-menu"
+                    style="display: {{ Route::current()->getName() == 'post' || Route::current()->getName() == 'category' ? 'block' : 'none' }}">
+                    <li class="{{ Route::current()->getName() == 'post' ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('post') }}">Manage Post</a></li>
+                    <li class="{{ Route::current()->getName() == 'category' ? 'active' : '' }}"><a class="nav-link"
+                            href="{{ route('category') }}">Manage Category</a></li>
                 </ul>
             </li>
 

@@ -10,19 +10,32 @@ class PostController extends Controller
 
     public function post()
     {
-        $posts = Post::limit(10)->get();
-
-       return view('post',compact('posts'));
+       return view('post');
 
     }
 
+    public function postList(Request $request)
+    {
+
+
+        $post = Post::query()->orderBy('id', 'asc');
+
+        if ($request->keyword != '') {
+            $post->where('title', 'LIKE', '%' . $request->keyword . '%');
+        }
+
+        $post = $post->paginate(10);
+
+        return response()->json($post);
+
+    }
 
     public function category()
     {
-        return view('category');
+        $categories = Post::limit(5)->get();
+        return view('category',compact('categories'));
 
     }
-
 
     public function store(Request $request)
     {

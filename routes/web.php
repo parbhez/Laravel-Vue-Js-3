@@ -16,8 +16,12 @@ use App\Http\Controllers\PostController;
 */
 
 
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('dashboard');
 
 Route::get('/post',[PostController::class,'post'])->name('post');
+Route::get('post/post-list',[PostController::class,'postList'])->name('post-list');
+
+
 
 Route::get('/category',[PostController::class,'category'])->name('category');
+

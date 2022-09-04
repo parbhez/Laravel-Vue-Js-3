@@ -37,7 +37,8 @@
                                     <div class="tab-pane fade show active" id="view-post" role="tabpanel"
                                         aria-labelledby="home-tab2">
 
-                                        <view-post-component :posts="{{$posts}}"></view-post-component>
+                                        
+                                        <view-post-component></view-post-component>
 
                                     </div>
 
@@ -58,6 +59,4 @@
     </div>
 @endsection
 
-@push('script')
-@vite('resources/js/post.js')
-@endpush
+

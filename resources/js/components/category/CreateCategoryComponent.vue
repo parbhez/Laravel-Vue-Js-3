@@ -78,7 +78,7 @@
                                             <th>Created At</th>
                                             <th>Status</th>
                                         </tr>
-                                        <tr>
+                                        <tr v-for="category in this.categories" :key="category.id">
                                             <td>
                                                 <div class="custom-checkbox custom-control">
                                                     <input type="checkbox" data-checkboxes="mygroup"
@@ -86,7 +86,7 @@
                                                     <label for="checkbox-2" class="custom-control-label">&nbsp;</label>
                                                 </div>
                                             </td>
-                                            <td>Laravel 5 Tutorial: Introduction
+                                            <td>{{ category.title }}
                                                 <div class="table-links">
                                                     <a href="#">View</a>
                                                     <div class="bullet"></div>
@@ -286,3 +286,11 @@
             </div>
 </template>
 
+<script>
+    export default {
+        props: ['categories'],
+        data(){
+            console.log('Component Mounted.')
+        }
+    }
+</script>

@@ -13,7 +13,8 @@
                     <div class="breadcrumb-item">All Category</div>
                 </div>
             </div>
-           <create-category-component></create-category-component>
+
+           <create-category-component :categories="{{$categories}}"></create-category-component>
         </section>
     </div>
 @endsection

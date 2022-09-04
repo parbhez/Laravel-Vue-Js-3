@@ -77,7 +77,7 @@
     <script src="{{ url('assets/js/page/components-table.js') }}"></script>
     <script src="{{ url('assets/js/page/features-post-create.js') }}"></script>
     <script src="{{ url('assets/js/page/features-posts.js') }}"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script> --}}
+   {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script> --}}
 
     <!-- Template JS File -->
     <script src="{{ url('assets/js/scripts.js') }}"></script>
