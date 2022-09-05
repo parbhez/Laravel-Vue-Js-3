@@ -2,8 +2,8 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3307
--- Generation Time: Sep 03, 2022 at 08:45 PM
+-- Host: 127.0.0.1
+-- Generation Time: Sep 05, 2022 at 02:35 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,31 @@ SET time_zone = "+00:00";
 --
 -- Database: `vue`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(10) NOT NULL,
+  `category_name` varchar(255) NOT NULL,
+  `status` int(11) DEFAULT 1,
+  `created_by` int(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `category_name`, `status`, `created_by`) VALUES
+(1, 'A', 1, NULL),
+(2, 'B', 1, NULL),
+(3, 'C', 1, NULL),
+(4, 'D', 1, NULL),
+(5, 'E', 1, NULL),
+(6, 'F', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -5169,6 +5194,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -5211,6 +5242,12 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
