@@ -19,6 +19,3 @@
     </div>
 @endsection
 
-@push('script')
-@vite('resources/js/category.js')
-@endpush

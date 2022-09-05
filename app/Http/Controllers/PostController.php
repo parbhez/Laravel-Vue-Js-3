@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+
 class PostController extends Controller
 {
-
     public function post()
     {
-        $category = DB::table('categories')
-            ->select('id', 'category_name')
-            ->where('status', '=', 1)
-            ->orderBy('id')
-            ->get();
 
-       return view('post',['categories' => $category]);
+        // $categories = Category::active()
+        // ->get(['id', 'category_name']); //locally scope
+
+        $categories = Category::get(['id', 'category_name']); //Globally Scope
+
+        // foreach ($categories as $category) {
+        //     echo $category->id.'====>'.$category->category_name.'<br>';
+        // }
+        // return;
+        return view('post', compact('categories'));
 
     }
 

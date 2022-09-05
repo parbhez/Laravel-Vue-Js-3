@@ -169,6 +169,8 @@ export default {
 
     pageClicked(pageNo) {
       var vm = this;
+
+      history.pushState(null, null, '?page=' + pageNo);
       vm.getPost(pageNo);
     },
   },

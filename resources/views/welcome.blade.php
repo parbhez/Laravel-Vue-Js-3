@@ -6,23 +6,20 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>Laravel Vue 3</title>
 
-     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css'])
+
+    @vite(['resources/js/app.css.js', 'resources/js/app.js'])
+
+
+    <!-- Extra vite/JS Scripts -->
+    @stack('script')
 
     <!-- Extra CSS Files -->
     @stack('style')
 
+
     <!-- General CSS Files -->
-    <link rel="stylesheet" href="{{ url('assets/modules/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/modules/fontawesome/css/all.min.css') }}">
 
-    <!-- CSS Libraries -->
-    <link rel="stylesheet" href="{{ url('assets/modules/summernote/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/modules/jquery-selectric/selectric.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
-
-    <!-- Template CSS -->
-    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
-    <link rel="stylesheet" href="{{ url('assets/css/components.css') }}">
     <input type="hidden" id="base_url" value="{{ url('/') }}">
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
@@ -40,7 +37,7 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" style="display: none;">
 
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
@@ -61,8 +58,7 @@
         var lang = "{{ app()->getLocale() }}"
     </script>
 
-    <!-- Extra JS Scripts -->
-    @stack('script')
+
     <!-- General JS Scripts -->
     <script src="{{ url('assets/modules/jquery.min.js') }}"></script>
     <script src="{{ url('assets/modules/popper.js') }}"></script>
@@ -89,7 +85,11 @@
     <script src="{{ url('assets/js/scripts.js') }}"></script>
     <script src="{{ url('assets/js/custom.js') }}"></script>
 
-
+    <script>
+        $(document).ready(function() {
+            $("#app").show();
+        })
+    </script>
 
 </body>
 
