@@ -10,7 +10,7 @@
 
         <div class="section-body">
 
-            <dashboard-component inline-template></dashboard-component>
+            <dashboard-component></dashboard-component>
         </div>
     </section>
 </div>

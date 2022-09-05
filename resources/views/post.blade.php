@@ -44,7 +44,7 @@
 
                                     <div class="tab-pane fade" id="add-post" role="tabpanel"
                                         aria-labelledby="profile-tab2">
-                                        <create-post-component></create-post-component>
+                                        <create-post-component :categories="{{ $categories }}"></create-post-component>
                                     </div>
 
                                 </div>
@@ -59,4 +59,6 @@
     </div>
 @endsection
 
-
+@push('script')
+@vite('resources/js/post.js')
+@endpush

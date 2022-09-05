@@ -1,6 +1,6 @@
 <template>
    <div class="section-body">
-                <h2 class="section-title">Categories</h2>
+                <h2 class="section-title">All Categories</h2>
                 <p class="section-lead">
                     You can manage all posts, such as editing, deleting and more.
                 </p>
@@ -101,7 +101,7 @@
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <img alt="image" src="assets/img/avatar/avatar-5.png"
+                                                    <img alt="image" src=""
                                                         class="rounded-circle" width="35" data-toggle="title"
                                                         title="">
                                                     <div class="d-inline-block ml-1">Rizal Fakhri</div>
@@ -135,7 +135,7 @@
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <img alt="image" src="assets/img/avatar/avatar-5.png"
+                                                    <img alt="image" src=""
                                                         class="rounded-circle" width="35" data-toggle="title"
                                                         title="">
                                                     <div class="d-inline-block ml-1">Rizal Fakhri</div>
@@ -169,7 +169,7 @@
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <img alt="image" src="assets/img/avatar/avatar-5.png"
+                                                    <img alt="image" src=""
                                                         class="rounded-circle" width="35" data-toggle="title"
                                                         title="">
                                                     <div class="d-inline-block ml-1">Rizal Fakhri</div>
@@ -203,7 +203,7 @@
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <img alt="image" src="assets/img/avatar/avatar-5.png"
+                                                    <img alt="image" src=""
                                                         class="rounded-circle" width="35" data-toggle="title"
                                                         title="">
                                                     <div class="d-inline-block ml-1">Rizal Fakhri</div>
@@ -237,7 +237,7 @@
                                             </td>
                                             <td>
                                                 <a href="#">
-                                                    <img alt="image" src="assets/img/avatar/avatar-5.png"
+                                                    <img alt="image" src=""
                                                         class="rounded-circle" width="35" data-toggle="title"
                                                         title="">
                                                     <div class="d-inline-block ml-1">Rizal Fakhri</div>

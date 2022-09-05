@@ -4,13 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
-
+use DB;
 class PostController extends Controller
 {
 
     public function post()
     {
-       return view('post');
+        $category = DB::table('categories')
+            ->select('id', 'category_name')
+            ->where('status', '=', 1)
+            ->orderBy('id')
+            ->get();
+
+       return view('post',['categories' => $category]);
 
     }
 
@@ -39,7 +45,7 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        //
+        return $request->all();
     }
 
 

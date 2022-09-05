@@ -19,6 +19,7 @@ use App\Http\Controllers\PostController;
 Route::get('/',[HomeController::class,'index'])->name('dashboard');
 
 Route::get('/post',[PostController::class,'post'])->name('post');
+Route::post('post/post-create',[PostController::class,'store'])->name('post-create');
 Route::get('post/post-list',[PostController::class,'postList'])->name('post-list');
 
 
