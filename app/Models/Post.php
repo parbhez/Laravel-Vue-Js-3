@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Post extends Model
 {
     use HasFactory;
-    protected $guarded = [];
+    protected $table = 'posts';
 
     public function category()
     {

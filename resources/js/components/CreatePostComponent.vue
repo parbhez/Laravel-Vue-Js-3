@@ -3,7 +3,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h4> Write Your Post </h4>
+                    <h4>Write Your Post</h4>
                 </div>
 
                 <div
@@ -53,7 +53,7 @@
                                     class="form-control"
                                     v-model="post.category_id"
                                 >
-                                    <option value="">
+                                    <option value="" disabled>
                                         Please Chose a Category
                                     </option>
                                     <option
@@ -84,9 +84,8 @@
                                 class="col-form-label text-md-right col-12 col-md-3 col-lg-3"
                                 >Thumbnail</label
                             >
-                            <div class="col-sm-12 col-md-7">
+                            <div class="col-sm-12 col-md-4">
                                 <div id="image-preview" class="image-preview">
-                                    <img :src="post.image" v-if="post.image" />
                                     <label for="image-upload" id="image-label"
                                         >Choose File</label
                                     >
@@ -95,6 +94,20 @@
                                         name="image"
                                         id="image-upload"
                                         @change="onImageChange"
+                                    />
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div id="image-preview" class="image-preview">
+                                    <label for="image-upload" id="image-label"
+                                        >Image Preview</label
+                                    >
+                                    <img
+                                        :src="post.image"
+                                        v-if="post.image"
+                                        width="250"
+                                        height="250"
                                     />
                                 </div>
                             </div>
@@ -124,6 +137,9 @@
                                     class="form-control"
                                     v-model="post.status"
                                 >
+                                    <option value="" disabled>
+                                        Please Choose a Status
+                                    </option>
                                     <option value="Publish">Publish</option>
                                     <option value="Draft">Draft</option>
                                     <option value="Pending">Pending</option>
@@ -152,8 +168,8 @@ export default {
     props: {
         categories: {
             type: Array,
-            default: []
-        }
+            default: [],
+        },
     },
 
     mounted() {
@@ -168,7 +184,7 @@ export default {
                 image: "",
                 content: "",
                 tag: "",
-                status: "Pending",
+                status: "",
             },
 
             button_name: "Create Post",
@@ -186,26 +202,31 @@ export default {
             let reader = new FileReader();
             let vm = this;
             reader.onload = (e) => {
-                vm.category.image = e.target.result;
+                vm.post.image = e.target.result;
             };
+            //console.log(vm.post.image);
             reader.readAsDataURL(file);
         },
 
         save() {
-            this.button_name = "Post Saving...";
+            this.button_name = "Saving Post...";
 
             axios
                 .post(base_url + "post/post-create", this.post)
                 .then((response) => {
                     console.log(response.data);
-                    return false;
+
                     if (response.data.status === "success") {
                         this.resetForm();
+                        console.log("data submit");
+                        return false;
                         this.successMessage(response.data);
                         EventBus.$emit("category-created");
 
                         this.button_name = "Save";
                     } else {
+                        console.log("error");
+                        return false;
                         this.successMessage(response.data);
                         this.button_name = "Save";
                     }
