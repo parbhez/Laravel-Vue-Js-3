@@ -50,7 +50,7 @@
                             >
                             <div class="col-sm-12 col-md-7">
                                 <select
-                                    class="form-control selectric"
+                                    class="form-control"
                                     v-model="post.category_id"
                                 >
                                     <option value="">
@@ -73,7 +73,7 @@
                             >
                             <div class="col-sm-12 col-md-7">
                                 <textarea
-                                    class="summernote-simple"
+                                    class="form-control"
                                     v-model="post.content"
                                     placeholder="Post Content"
                                 ></textarea>
@@ -121,7 +121,7 @@
                             >
                             <div class="col-sm-12 col-md-7">
                                 <select
-                                    class="form-control selectric"
+                                    class="form-control"
                                     v-model="post.status"
                                 >
                                     <option value="Publish">Publish</option>
@@ -157,7 +157,7 @@ export default {
     },
 
     mounted() {
-        console.log(this.categories)
+        //console.log(this.posts)
     },
 
     data() {

@@ -14,14 +14,16 @@
                         aria-label="Previous"
                         v-if="pageData.current_page != 1"
                     >
-                        <span aria-hidden="true">«</span>
-                        <span class="sr-only">Previous</span>
+                        <!-- <span aria-hidden="true">«</span>
+                        <span class="sr-only">Previous</span> -->
+                        Previous
                     </a>
                     <a v-else>
-                        <span aria-hidden="true"> «</span>
-                        <span class="sr-only">Previous</span>
+                        <!-- <span aria-hidden="true"> «</span>
+                        <span class="sr-only">Previous</span> -->
+                        Previous
                     </a>
-                </li>
+                </li> &nbsp;
 
                 <li
                     :class="[
@@ -59,12 +61,14 @@
                         aria-label="Next"
                         v-if="pageData.current_page != pageData.last_page"
                     >
-                        <span aria-hidden="true">»</span>
-                        <span class="sr-only">Next</span>
+                        <!-- <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span> -->
+                        Next
                     </a>
                     <a v-else>
-                        <span aria-hidden="true">»</span>
-                        <span class="sr-only">Next</span>
+                        <!-- <span aria-hidden="true">»</span>
+                        <span class="sr-only">Next</span> -->
+                        Next
                     </a>
                 </li>
             </ul>

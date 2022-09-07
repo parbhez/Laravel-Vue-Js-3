@@ -21,6 +21,7 @@ class CategoryScope implements Scope
                 $q->where('status', request('status'));
             });
 
+        //Category with post; => Relationship query ; ei posts hoycce Category Model posts function name ta; 
         // ->whereHas('posts', function($q) [
         //     $q->
         // ])

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -27,15 +26,14 @@ class PostController extends Controller
 
     public function postList(Request $request)
     {
+       
+        $post = Post::query();
 
+        // $post = Post::query()->orderBy('id', 'asc');
 
-        $post = Post::query()->orderBy('id', 'asc');
-
-        if ($request->keyword != '') {
-            $post->where('title', 'LIKE', '%' . $request->keyword . '%');
+        if ($request->limit != '') {
+            $post = $post->paginate($request->limit);
         }
-
-        $post = $post->paginate(20);
 
         return response()->json($post);
 
