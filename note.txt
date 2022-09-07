@@ -91,5 +91,5 @@ source = https://vuejs.org/guide/components/registration.html
 3. npm run build= ei command diye build kore then cpanel project upload korte hoy
 
 ============================vue===================
-1. mixin => sob mane helper function. sob doroner message thakbe
+1. mixin => mane helper function. sob doroner message thakbe
 2.$emit => ..............
