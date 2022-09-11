@@ -5,11 +5,11 @@
                 <div class="card-header">
                     <h4>Write Your Post</h4>
                 </div>
-
                 <div
                     class="col-12"
                     v-if="validation_error"
-                    style="margin-top: 20px"
+                    v-show="elementVisible"
+                    style="margin-top: 3px"
                 >
                     <div class="form-group">
                         <div>
@@ -164,7 +164,11 @@
 </template>
 
 <script>
+import Mixin from "../mixin";
+
 export default {
+    mixins: [Mixin],
+
     props: {
         categories: {
             type: Array,
@@ -186,9 +190,9 @@ export default {
                 tag: "",
                 status: "",
             },
-
             button_name: "Create Post",
             validation_error: null,
+            elementVisible: true,
         };
     },
 
@@ -208,42 +212,37 @@ export default {
             reader.readAsDataURL(file);
         },
 
-        save() {
+        async save() {
             this.button_name = "Saving Post...";
 
-            axios
+            await axios
                 .post(base_url + "post/post-create", this.post)
                 .then((response) => {
                     console.log(response.data);
 
                     if (response.data.status === "success") {
                         this.resetForm();
-                        console.log("data submit");
-                        return false;
                         this.successMessage(response.data);
-                        EventBus.$emit("category-created");
-
-                        this.button_name = "Save";
+                        //EventBus.$emit("post-created");
+                        this.button_name = "Create Post";
                     } else {
-                        console.log("error");
-                        return false;
                         this.successMessage(response.data);
-                        this.button_name = "Save";
+                        this.button_name = "Create Post";
                     }
                 })
                 .catch((err) => {
                     if (err.response.status == 422) {
+                        console.log(err.response.data);
                         this.validation_error = err.response.data.errors;
-
                         this.validationError();
-
-                        this.button_name = "Save";
+                        this.isValidatedError = true;
+                        setTimeout(() => (this.elementVisible = false), 20000);
+                        this.button_name = "Create Post";
                     } else {
                         this.successMessage(err);
-
+                        console.log(err);
                         this.isloading = false;
-
-                        this.button_name = "Save";
+                        this.button_name = "Create Post";
                     }
                 });
         },
@@ -255,7 +254,7 @@ export default {
                 image: "",
                 content: "",
                 tag: "",
-                status: "Pending",
+                status: "",
             };
 
             this.validation_error = null;

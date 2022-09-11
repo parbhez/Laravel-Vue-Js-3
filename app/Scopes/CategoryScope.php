@@ -16,12 +16,13 @@ class CategoryScope implements Scope
                 return $q2->where('category_name', 'LIKE', '%' . request('search') . '%')
                     ->orWhere('status', 'LIKE', '%' . request('search') . '%');
             });
-        })
-            ->when(request()->has('status'), function ($q) {
+        });
+
+        $builder->when(request()->has('status'), function ($q) {
                 $q->where('status', request('status'));
             });
 
-        //Category with post; => Relationship query ; ei posts hoycce Category Model posts function name ta; 
+        //Category with post; => Relationship query ; ei posts hoycce Category Model posts function name ta;
         // ->whereHas('posts', function($q) [
         //     $q->
         // ])

@@ -2,13 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use Image;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use Image;
+use App\Scopes\CategoryScope;
+use App\Http\Requests\Post\PostRequest;
+use Illuminate\Database\Eloquent\Builder;
 
 class PostController extends Controller
 {
+    public function eloquent_data_show()
+    {
+        //Single value query
+        $post = Category::find(3)->posts; //category theke post
+        $category = Post::find(3)->category; // post theke category
+
+        //return $post;
+        //return $category;
+
+        //All value query
+        $categories = Category::with('posts')->limit(10)->get(); //Has Many
+        $posts = Post::with('category')->limit(10)->get(); //belongs to
+        //return $posts;
+
+        return view('eloquent', compact('categories', 'posts'));
+    }
+
     public function post()
     {
 
@@ -21,21 +41,33 @@ class PostController extends Controller
         //     echo $category->id.'====>'.$category->category_name.'<br>';
         // }
         // return;
+
         return view('post', compact('categories'));
     }
 
-    public function postList(Request $request)
+
+    public function getPostList(Request $request)
     {
 
-        $post = Post::query();
-
-        // $post = Post::query()->orderBy('id', 'asc');
+        $post = Post::with('category'); //belongs to
 
         if ($request->limit != '') {
             $post = $post->paginate($request->limit);
         }
 
         return response()->json($post);
+    }
+
+    public function postList(Request $request)
+    {
+
+        $post = Post::with('category'); //belongs to
+
+        $post = $post->paginate(10);
+
+        return response()->json([
+            "post" => $post
+        ], 200);
     }
 
     public function category()
@@ -46,12 +78,13 @@ class PostController extends Controller
 
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|unique:categories,category_name',
-        //     'image' => 'nullable|image64:jpeg,jpg,png,gif',
-        // ], [
-        //     'image.image64' => 'File must be an image of jpeg,png,gif',
-        // ]);
+        $request->validate([
+            'title' => 'required',
+            'category_id' => 'required',
+            'tag' => 'required',
+            'status' => 'required',
+        ]);
+
 
         try {
 
@@ -67,7 +100,7 @@ class PostController extends Controller
             if ($imageData) {
 
                 $fileName = uniqid() . '.' . explode('/', explode(':', substr($imageData, 0, strpos($imageData, ';')))[1])[1];
-                $path = public_path('images/post')."/".$fileName;
+                $path = public_path('images/post') . "/" . $fileName;
                 Image::make($request->get('image'))->save($path);
 
                 $post->thumbnail = $fileName;
@@ -81,7 +114,7 @@ class PostController extends Controller
 
             return response()->json(['status' => 'success', 'message' => 'Post Created Successfully !']);
         } catch (\Exception $e) {
-            return $e;
+            // return $e;
             return response()->json(['status' => 'error', 'message' => 'Opps Something Went Wrong!']);
         }
     }

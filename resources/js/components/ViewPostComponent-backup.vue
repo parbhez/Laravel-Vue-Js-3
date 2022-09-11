@@ -6,7 +6,7 @@
                     <h4>All Posts</h4>
                 </div>
 
-
+                {{ showFullName }}
 
                 <vue-snotify></vue-snotify>
 
@@ -251,6 +251,7 @@ export default {
 
     data() {
         return {
+            posts: [],
             isLoading: false,
             keyword: "",
             url: base_url,
@@ -260,19 +261,88 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch("getAllPost");
+        // this  will not work in eventBus that why
+        // we are initializing with _this
+        var _this = this;
+        _this.getPost();
     },
 
     computed:{
-        posts(){
+        showFullName(){
             return this.$store.getters.getPostData;
         }
     },
 
     methods: {
+        async getPost(page = 1) {
+            this.isLoading = true;
+            await axios
+                .get(
+                    base_url +
+                        "post/post-list?page=" +
+                        page +
+                        "&keyword=" +
+                        this.keyword +
+                        "&limit=" +
+                        this.limit
+                )
+                .then((response) => {
+                    console.log(response.data);
+                    this.posts = response.data;
+                    this.isLoading = false;
+                })
+                .catch((error) => {
+                    console.log(error);
+                    this.posts = [];
+                });
+        },
+        getonchangePost() {
+            //console.log(this.limit);
+            var vm = this;
+            history.pushState(
+                null,
+                null,
+                "?page=" +
+                    this.page +
+                    "&keyword=" +
+                    this.keyword +
+                    "&limit=" +
+                    this.limit
+            );
+            vm.getPost();
+        },
+        getkeyupPost() {
+            var vm = this;
+            history.pushState(
+                null,
+                null,
+                "?page=" +
+                    this.page +
+                    "&keyword=" +
+                    this.keyword +
+                    "&limit=" +
+                    this.limit
+            );
+            vm.getPost();
+        },
 
+        pageClicked(pageNo) {
+            var vm = this;
+            history.pushState(null, null, "?page=" + pageNo);
+            vm.getPost(pageNo);
+        },
 
-
-    }
+        clearFilter() {
+            this.keyword = "";
+            this.limit = 10;
+            this.getPost();
+            this.$snotify.success("Data Refresh", "success", {
+                timeout: 2000,
+                showProgressBar: true,
+                closeOnClick: false,
+                pauseOnHover: true,
+            });
+        },
+    },
 };
 </script>
