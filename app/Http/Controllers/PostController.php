@@ -63,7 +63,9 @@ class PostController extends Controller
 
         $post = Post::with('category'); //belongs to
 
-        $post = $post->paginate(10);
+        if ($request->limit != '') {
+            $post = $post->paginate($request->limit);
+        }
 
         return response()->json([
             "post" => $post

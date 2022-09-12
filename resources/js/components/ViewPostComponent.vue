@@ -6,9 +6,8 @@
                     <h4>All Posts</h4>
                 </div>
 
-
-
                 <vue-snotify></vue-snotify>
+                <preloader-component></preloader-component>
 
                 <div class="card-body">
                     <div class="float-left" style="margin-right: 10px">
@@ -86,7 +85,6 @@
                     <div class="float-left">
                         <select
                             v-model="limit"
-                            @change="getonchangePost()"
                             class="form-control form-control-sm"
                         >
                             <option value="10">10</option>
@@ -241,14 +239,7 @@
 </template>
 
 <script>
-
-import PaginationComponent from "./pagination/PaginationComponent.vue";
-
 export default {
-    components: {
-        "pagination-component": PaginationComponent,
-    },
-
     data() {
         return {
             isLoading: false,
@@ -260,19 +251,25 @@ export default {
     },
 
     mounted() {
-        this.$store.dispatch("getAllPost");
+        this.$store.dispatch("getAllPost", [this.page, this.limit]);
     },
 
-    computed:{
-        posts(){
+    watch: {
+        limit(newLimit, oldLimit) {
+            if (newLimit) {
+                this.showToggle;
+                this.$store.dispatch("getAllPost", [this.page, newLimit]);
+            }
+        },
+    },
+
+    computed: {
+        posts() {
             return this.$store.getters.getPostData;
-        }
+            //return this.$store.state.postDataArr;
+        },
     },
 
-    methods: {
-
-
-
-    }
+    methods: {},
 };
 </script>

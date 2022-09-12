@@ -40,5 +40,11 @@ app.component('create-post-component', CreatePostComponent);
 import CreateCategoryComponent from './components/category/CreateCategoryComponent.vue';
 app.component('create-category-component', CreateCategoryComponent);
 
+//Global register in Pagination
+import PaginationComponent from './components/pagination/PaginationComponent.vue';
+app.component('pagination-component', PaginationComponent);
+
+import PreloaderComponent from './components/pagination/Preloader.vue';
+app.component('preloader-component', PreloaderComponent);
 
 app.mount('#app');

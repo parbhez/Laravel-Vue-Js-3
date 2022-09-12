@@ -23,7 +23,8 @@
                         <span class="sr-only">Previous</span> -->
                         Previous
                     </a>
-                </li> &nbsp;
+                </li>
+                &nbsp;
 
                 <li
                     :class="[
@@ -81,7 +82,9 @@ export default {
     props: ["pageData"],
 
     data() {
-        return {};
+        return {
+            limit:10
+        };
     },
 
     methods: {
@@ -92,8 +95,9 @@ export default {
         },
 
         pageClicked(page) {
-            console.log(page);
-            this.$parent.pageClicked(page);
+            //console.log(page);
+            this.$store.dispatch("getAllPost",[page,this.limit]);
+            // history.pushState(null, null, "?page=" + page);
         },
     },
 
